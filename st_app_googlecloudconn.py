@@ -4,14 +4,6 @@ import pandas as pd
 import gcsfs
 import os
 
-
-# Step 1: Create a storage client
-storage_client = storage.Client.from_service_account_json(
-    './black-heading-405002-e11b4e15b0e5.json')
-
-# Create a GCS file system instance
-fs = gcsfs.GCSFileSystem(token='./black-heading-405002-e11b4e15b0e5.json')
-
 # Specify the GCS file path
 gcs_file_path = 'gs://hw3_bucket2/myfile2.csv'
 
