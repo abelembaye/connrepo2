@@ -52,19 +52,19 @@ else:
         if submit_button:
             # Use the username from session state
             file_name = f'{st.session_state["username"]}_output.html'
-            with open(file_name, 'w') as f:
-                f.write('<html><body><p>{}</p></body></html>'.format(user_input))
-
+            # with open(file_name, 'w') as f:
+            #     f.write('<html><body><p>{}</p></body></html>'.format(user_input)) # if you want to save the file locally
+            html_content = '<html><body><p>{}</p></body></html>'.format(
+                user_input)
             # Step 3: Upload the HTML file to GCS
             bucket_name = 'hw3_bucket2'
             bucket = storage_client.get_bucket(bucket_name)
+            # file_name is the name of the file to be uploaded
             blob = bucket.blob(file_name)
-            blob.upload_from_filename(file_name)
+            # blob.upload_from_filename(file_name) # if the upload is from local file  # if the upload is from string, meaning from the app
+            blob.upload_from_string(html_content, content_type='text/html')
+
             st.success(
                 'Homework submitted successfully!  \n You can now close the browser to logout!')
 
 
-# To run this app, open a terminal and run the following commands:
-# cd "C:\Users\aembaye\OneDrive - University of Arkansas\C2-embaye\Rh\Learn\_Python\myProjects\saving_stfile2cloud"
-# conda activate venv4saving2cloud
-# streamlit run app4st_tutorial2connecting2googlecloud2.py
