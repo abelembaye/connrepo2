@@ -8,7 +8,7 @@ import gcsfs
 GCS_SERVICE_ACCOUNT_JSON = st.secrets["GCS_SERVICE_ACCOUNT"]
 
 # Load the JSON data from the secret
-service_account_info = json.loads(GCS_SERVICE_ACCOUNT_JSON)
+service_account_info = json.loads(GCS_SERVICE_ACCOUNT)
 
 # Initialize the storage client
 storage_client = storage.Client.from_service_account_info(service_account_info)
