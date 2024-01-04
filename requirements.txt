@@ -1,0 +1,4 @@
+gcsfs
+st-files-connection
+streamlit
+streamlit-embedcode
