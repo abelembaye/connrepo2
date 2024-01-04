@@ -1,4 +1,5 @@
-gcsfs
-st-files-connection
 streamlit
-streamlit-embedcode
+google.cloud
+gcsfs
+pandas
+os
