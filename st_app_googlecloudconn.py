@@ -1,9 +1,7 @@
-import json
 import streamlit as st
 from google.cloud import storage
 import pandas as pd
 import gcsfs
-import os
 
 # Fetch the secret
 GCS_SERVICE_ACCOUNT_JSON = st.secrets["GCS_SERVICE_ACCOUNT"]
