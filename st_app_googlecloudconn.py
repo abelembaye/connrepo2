@@ -1,11 +1,21 @@
+import json
 import streamlit as st
 from google.cloud import storage
 import pandas as pd
 import gcsfs
-import os
 
-# Specify the GCS file path
-gcs_file_path = 'gs://hw3_bucket2/myfile2.csv'
+# Fetch the secret
+GCS_SERVICE_ACCOUNT_JSON = st.secrets["GCS_SERVICE_ACCOUNT"]
+
+# Load the JSON data from the secret
+service_account_info = json.loads(GCS_SERVICE_ACCOUNT_JSON)
+
+# Initialize the storage client
+storage_client = storage.Client.from_service_account_info(service_account_info)
+
+# Create a GCS file system instance
+fs = gcsfs.GCSFileSystem(token=service_account_info)
+
 
 # Read the CSV file from GCS into a pandas DataFrame
 with fs.open(gcs_file_path, 'r') as f:
