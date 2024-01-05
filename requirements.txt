@@ -1,7 +1,5 @@
 streamlit
 gcsfs
 google.cloud
-json5
-st-files-connection
 
 
