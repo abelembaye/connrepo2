@@ -3,6 +3,7 @@ import pandas as pd
 from google.cloud import storage
 import gcsfs
 import json
+import st-files-connection
 
 
 # Fetch the secret
