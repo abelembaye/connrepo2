@@ -1,23 +1,35 @@
-import streamlit as st
-import pandas as pd
 from google.cloud import storage
-import gcsfs
-import json
+import streamlit as st
 
-# Create a connection to GCS
-# fs = gcsfs.GCSFileSystem(project='black-heading-405002',
-#                          token='black-heading-405002-e11b4e15b0e5.json')
+# Step 1: Create a storage client
+storage_client = storage.Client.from_service_account_json(
+    './black-heading-405002-e11b4e15b0e5.json')
 
-#st.cache.clear()
-fs = gcsfs.GCSFileSystem(token='black-heading-405002-e11b4e15b0e5.json')
+# Step 2: Generate the HTML file from user input
+st.title("Econ 2013 HW3")
 
-# Read the CSV file from GCS into a pandas DataFrame
-with fs.open('hw3_bucket2/myfile2.csv') as f:
-    df = pd.read_csv(f)
+firstname = st.text_input("Enter your first name")
+lastname = st.text_input("Enter your last name")
+user_input = st.text_input("Enter your homework answer")
 
-# Print results.
-for row in df.itertuples():
-    st.write(f"{row.username} has a :{row.password}:")
+if st.button('Submit Homework'):
+    # Construct the HTML content with user input
+    html_content = '<html><body><p>{}</p></body></html>'.format(user_input)
+
+    # Step 3: Upload the HTML content to GCS
+    bucket_name = 'hw3_bucket2'
+    bucket = storage_client.get_bucket(bucket_name)
+
+    # Create a blob (object) with a unique name
+    blob_name = f'{lastname}_{firstname}_output.html'
+    blob = bucket.blob(blob_name)
+
+    # Upload the HTML content as the blob's content
+    blob.upload_from_string(html_content)
+
+    st.success('Homework submitted successfully!')
+
+
 
 
 
