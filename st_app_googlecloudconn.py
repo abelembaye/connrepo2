@@ -3,7 +3,7 @@ import pandas as pd
 from google.cloud import storage
 import gcsfs
 import json
-import st-files-connection
+from st_files_connection import FilesConnection
 
 # Create connection object and retrieve file contents.
 # Specify input format is a csv and to cache the result for 600 seconds.
