@@ -1,5 +1,4 @@
-streamlit
+streamlit>=1.22
+git+https://github.com/streamlit/files-connection
+s3fs
 gcsfs
-st-files-connection
-
-
